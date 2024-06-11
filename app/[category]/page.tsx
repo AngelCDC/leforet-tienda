@@ -3,8 +3,6 @@ import { simplifiedProduct } from "../interface";
 import { client } from "@/app/lib/sanity";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
-
 async function getData(category:string){
     const query = `*[_type=="product" && category->name=="${category}"]{
         _id,
@@ -18,6 +16,8 @@ async function getData(category:string){
       const data = await client.fetch(query);
       return data;
 }
+
+export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({params}: {params: {category:string};
 }){
