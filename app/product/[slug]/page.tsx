@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/sanity";
 import ImageGallery from "@/app/components/ImageGallery";
@@ -19,7 +21,7 @@ async function getData(slug:string) {
     return data;
 }
 
-export const dynamic = 'force-dynamic';
+
 export default async function ProductPage({params}:{params:{slug:string}}){
     const data:fullProduct = await getData(params.slug)
     return(
