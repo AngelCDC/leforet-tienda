@@ -1,4 +1,4 @@
-export const revalidate = 0
+
 
 import Link from "next/link";
 import { simplifiedProduct } from "../interface";
@@ -19,7 +19,8 @@ async function getData(category:string){
       return data;
 }
 
-
+export const dynamic = 'force-dynamic'; // por defecto: auto
+export const revalidate = 100; // por defecto: false
 
 export default async function CategoryPage({params}: {params: {category:string};
 }){
