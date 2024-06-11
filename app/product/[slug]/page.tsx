@@ -7,7 +7,7 @@ import AddToBag from "@/app/components/AddTobag";
 
 
 
-
+export const dynamic = "force-dynamic";
 
 
 
