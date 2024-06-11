@@ -2,7 +2,7 @@ import Image from "next/image";
 import Hero from "@/app/components/Hero";
 import Newest from "@/app/components/Newest";
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
