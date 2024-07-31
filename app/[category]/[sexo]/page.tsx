@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { simplifiedProduct } from "../interface";
+import { simplifiedProduct } from "../../interface";
 import { client } from "@/app/lib/sanity";
 import Image from "next/image";
 
-async function getData(category:string){
-    const query = `*[_type=="product" && category->name=="${category}" ]{
+async function getData(category:string, sexo:string){
+    const query = `*[_type=="product" && category->name=="${category}" && sexo->name=="${sexo}" ]{
         _id,
           "imageUrl": images[0].asset->url,
             price,
@@ -20,16 +20,16 @@ async function getData(category:string){
 export const dynamic = 'force-dynamic'; // por defecto: auto
 export const revalidate = 100; // por defecto: false
 
-export default async function CategoryPage({params}: {params: {category:string};
+export default async function CategoryPage({params}: {params: {category:string, sexo:string};
 }){
-    const data:simplifiedProduct[] = await getData(params.category);
+    const data:simplifiedProduct[] = await getData(params.category, params.sexo);
 
     return(
         <div className="bg-white">
             <div className="mx-auto ax-w-2xl px-4 lg:max-w-7xl lg:px-8">
                 <div className="flex justify-between items-center">
                     <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                        Productos para {params.category}
+                        {params.sexo} para {params.category}
                     </h2>
                 </div>
 

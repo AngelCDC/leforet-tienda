@@ -40,5 +40,13 @@ export default {
                 type: `category`,
             }]
         },
+        {
+            name:`sexo`,
+            title: `Sexo del Producto`,
+            type: `reference`,
+            to: [{
+                type: `category`,
+            }]
+        },
     ],
 }

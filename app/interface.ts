@@ -4,6 +4,7 @@ export interface simplifiedProduct{
     price: number;
     slug: string;
     categoryName: string;
+    sexoName: string;
     name: string;
 }
 
