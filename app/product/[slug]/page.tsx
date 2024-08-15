@@ -4,6 +4,7 @@ import ImageGallery from "@/app/components/ImageGallery";
 import { Button } from "@/components/ui/button";
 import { Star, Truck } from "lucide-react";
 import AddToBag from "@/app/components/AddTobag";
+import Link from "next/link";
 
 async function getData(slug:string) {
     const query = `*[_type=="product" && slug.current=="${slug}"][0]{
@@ -75,7 +76,7 @@ export default async function ProductPage({params}:{params:{slug:string}}){
                             price={data.price} 
                             key={data._id}
                             />
-                            <Button>Comprar Ahora</Button>
+                            <Link href={`https://wa.me/584148726893?text=Hola,%20me%20interesa%20el%20siguiente%20producto.%20${data.name},%20me%20confirma%20su%20precio%20y%20disponibilidad?`}><Button>Comprar Ahora</Button></Link>
                         </div>
 
                         <p className="mt-8 text-base text-gray-500 tracking-wide">{data.description}</p>
