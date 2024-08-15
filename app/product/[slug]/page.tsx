@@ -25,6 +25,7 @@ export const revalidate = 100; // por defecto: false
 
 export default async function ProductPage({params}:{params:{slug:string}}){
     const data:fullProduct = await getData(params.slug)
+    var  url = "https://wa.me/584148726893?text=" + "Hola, Me interesa el siguiente producto." + "*Producto: *";
     return(
         <div className="bg-white mt-6">
             <div className="x-auto max-w-screen-xl px-4 md:px-8">
@@ -76,7 +77,7 @@ export default async function ProductPage({params}:{params:{slug:string}}){
                             price={data.price} 
                             key={data._id}
                             />
-                            <Link href={`https://wa.me/584148726893?text=Hola,%20me%20interesa%20el%20siguiente%20producto.%20${data.name},%20me%20confirma%20su%20precio%20y%20disponibilidad?`}><Button>Comprar Ahora</Button></Link>
+                            <Link href={`https://wa.me/584148726893?text=*Hola,%20me%20interesa%20el%20siguiente%20aticulo*.%0a*Producto:*%20${data.name}%0a*Categoria:*%20${data.categoryName}%0a*Precio:*%20${data.price}$`}><Button>Comprar Ahora</Button></Link>
                         </div>
 
                         <p className="mt-8 text-base text-gray-500 tracking-wide">{data.description}</p>
