@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <CartProvider>
         <Navbar/>
-        {/* <Header/> */}
+        <Header/>
         <HeaderMobile/>
         <ShoppingCartModal/>
         {children}

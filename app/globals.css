@@ -81,3 +81,9 @@
       display: none;
     }
   }
+
+  @media (min-width: 600px) {
+    .nav-nav{
+      display: none;
+    }
+  }
