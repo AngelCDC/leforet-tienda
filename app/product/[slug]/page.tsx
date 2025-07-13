@@ -6,15 +6,16 @@ import ProductPage from "./client";
 
 async function getData(slug: string): Promise<fullProduct> {
   const query = `*[_type=="product" && slug.current=="${slug}"][0]{
-    _id,
-    images,
-    price,
-    name,
-    description,
-    "slug": slug.current,
-    "categoryName": sexo->name,
-    "sexoName": category->name,
-  }`;
+  _id,
+  "images": images[].asset->url, // <-- esto convierte cada imagen en un string
+  price,
+  name,
+  description,
+  "slug": slug.current,
+  "categoryName": sexo->name,
+  "sexoName": category->name,
+}`;
+
 
   return await client.fetch(query);
 }
