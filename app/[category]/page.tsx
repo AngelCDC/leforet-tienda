@@ -1,10 +1,14 @@
 // app/category/[category]/page.tsx
-import { Metadata } from "next";
-import { client } from "@/app/lib/sanity";
-import CategoryPage from "./client"
-import { simplifiedProduct } from "@/app/interface";
 
-async function getData(category: string): Promise<simplifiedProduct[]> {
+import { Metadata } from "next";
+
+import { simplifiedProduct } from "../interface";
+import { client } from "@/app/lib/sanity";
+import CategoryProducts from "./client";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+
+async function getData(category: string) {
   const query = `*[_type=="product" && category->name=="${category}" ]{
     _id,
     "imageUrl": images[0].asset->url,
@@ -13,13 +17,18 @@ async function getData(category: string): Promise<simplifiedProduct[]> {
     "slug": slug.current,
     "categoryName": category->name
   }`;
-
-  return await client.fetch(query);
+  const data = await client.fetch(query);
+  return data;
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}): Promise<Metadata> {
   const data = await getData(params.category);
-  const capitalized = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+  const capitalized =
+    params.category.charAt(0).toUpperCase() + params.category.slice(1);
 
   return {
     title: `Productos de ${capitalized} | Le Forêt`,
@@ -34,9 +43,33 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-export default async function CategoryPageWrapper({ params }: { params: { category: string } }) {
-  const data = await getData(params.category);
-  return <CategoryPage params={{
-      category: params.category
-  }} />;
+export const dynamic = "force-dynamic";
+export const revalidate = 100;
+
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const data: simplifiedProduct[] = await getData(params.category);
+
+  return (
+    <div className="bg-white py-2">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="bg-white border-gray-100">
+          <div className="max-w-7xl mx-auto  py-3">
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              Productos
+              <ChevronRight className="w-4 h-4" />
+              <Link href={`/${params.category}`} className="hover:text-primary">
+                {params.category}
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <CategoryProducts products={data} />
+      </div>
+    </div>
+  );
 }
