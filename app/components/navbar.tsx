@@ -165,7 +165,7 @@ export default function Navbar() {
                         {cat.items.map((item, i) => (
                           <Link
                             key={i}
-                            href={`/${cat.name.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                            href={`/${cat.name}/${item.replace(/\s+/g, "-")}`}
                             className="block text-gray-700 hover:text-primary text-sm py-2 px-3 rounded-md hover:bg-gray-50 transition-colors"
                           >
                             {item}
@@ -286,7 +286,7 @@ export default function Navbar() {
                       {cat.items.map((item, i) => (
                         <Link
                           key={i}
-                          href={`/${cat.name.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                          href={`/${cat.name}/${item.replace(/\s+/g, "-")}`}
                           className="text-sm text-gray-600 hover:text-primary transition py-1"
                           onClick={() => setShowMobileMenu(false)}
                         >

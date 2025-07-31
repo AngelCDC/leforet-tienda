@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/app/components/navbar";
 import CartProvider from "@/app/components/providers";
 import ShoppingCartModal from "@/app/components/ShoppingCartModule";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,8 @@ export default function RootLayout({
         {children}
 
         </CartProvider>
+
+        <Footer/>
 
         </body>
     </html>

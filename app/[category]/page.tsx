@@ -1,24 +1,29 @@
-// app/category/[category]/page.tsx
+// app/category/[category]/page.tsx - Versión optimizada
 
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { simplifiedProduct } from "../interface";
 import { client } from "@/app/lib/sanity";
 import CategoryProducts from "./client";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-async function getData(category: string) {
-  const query = `*[_type=="product" && category->name=="${category}" ]{
-    _id,
-    "imageUrl": images[0].asset->url,
-    price,
-    name,
-    "slug": slug.current,
-    "categoryName": category->name
+async function getDataWithValidation(category: string) {
+  // Consulta que obtiene productos Y verifica si la categoría existe
+  const query = `{
+    "category": *[_type=="category" && name=="${category}"][0],
+    "products": *[_type=="product" && category->name=="${category}" ]{
+      _id,
+      "imageUrl": images[0].asset->url,
+      price,
+      name,
+      "slug": slug.current,
+      "categoryName": category->name
+    }
   }`;
-  const data = await client.fetch(query);
-  return data;
+
+  const result = await client.fetch(query);
+  return result;
 }
 
 export async function generateMetadata({
@@ -26,7 +31,17 @@ export async function generateMetadata({
 }: {
   params: { category: string };
 }): Promise<Metadata> {
-  const data = await getData(params.category);
+  const { category: categoryData, products } = await getDataWithValidation(
+    params.category
+  );
+
+  if (!categoryData) {
+    return {
+      title: "Página no encontrada | Le Forêt",
+      description: "La página que buscas no existe.",
+    };
+  }
+
   const capitalized =
     params.category.charAt(0).toUpperCase() + params.category.slice(1);
 
@@ -36,8 +51,8 @@ export async function generateMetadata({
     openGraph: {
       title: `Compra productos de ${capitalized} | Le Forêt`,
       description: `Explora productos únicos de la categoría ${capitalized}.`,
-      images: data[0]?.imageUrl
-        ? [{ url: data[0].imageUrl, width: 1200, height: 630 }]
+      images: products[0]?.imageUrl
+        ? [{ url: products[0].imageUrl, width: 1200, height: 630 }]
         : [],
     },
   };
@@ -51,13 +66,20 @@ export default async function CategoryPage({
 }: {
   params: { category: string };
 }) {
-  const data: simplifiedProduct[] = await getData(params.category);
+  const { category: categoryData, products } = await getDataWithValidation(
+    params.category
+  );
+
+  // ✅ Si la categoría no existe, mostrar 404
+  if (!categoryData) {
+    notFound();
+  }
 
   return (
     <div className="bg-white py-2">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="bg-white border-gray-100">
-          <div className="max-w-7xl mx-auto  py-3">
+          <div className="max-w-7xl mx-auto py-3">
             <div className="flex items-center space-x-2 text-sm text-gray-500">
               Productos
               <ChevronRight className="w-4 h-4" />
@@ -68,7 +90,7 @@ export default async function CategoryPage({
           </div>
         </div>
 
-        <CategoryProducts products={data} />
+        <CategoryProducts products={products} />
       </div>
     </div>
   );
