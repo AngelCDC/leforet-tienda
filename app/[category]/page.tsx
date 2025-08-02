@@ -28,14 +28,13 @@ async function getDataWithValidation(category: string) {
   }
 
   // Si es "ofertas", buscar productos que tengan categoría con slug "ofertas"
-  if (category === "ofertas") {
-    const query = `{ "products": *[_type=="product" && "Oferta" in categories[]->name]{
+  if (category === "Ofertas") {
+    const query = `{ "products": *[_type=="product" && "Ofertas" in categories[]->name]{
         _id,
         "imageUrl": images[0].asset->url,
         price,
         name,
-        "slug": slug.current,
-        "categories": category[]->name
+        "slug": slug.current
       }
     }`;
     
@@ -76,7 +75,7 @@ export async function generateMetadata({
     };
   }
 
-  if (params.category === "ofertas") {
+  if (params.category === "Ofertas") {
     return {
       title: "Ofertas Especiales | Le Forêt",
       description: "Descubre nuestras mejores ofertas y productos en descuento.",
@@ -127,19 +126,19 @@ export default async function CategoryPage({
   );
 
   // Si no es "all" ni "ofertas" y la categoría no existe, mostrar 404
-  if (params.category !== "all" && params.category !== "ofertas" && !categoryData) {
+  if (params.category !== "all" && params.category !== "Ofertas" && !categoryData) {
     notFound();
   }
 
   const pageTitle = params.category === "all" 
     ? "Todos los Productos" 
-    : params.category === "ofertas"
+    : params.category === "Ofertas"
     ? "Ofertas Especiales"
     : params.category;
 
   const breadcrumbText = params.category === "all" 
     ? "Todos" 
-    : params.category === "ofertas"
+    : params.category === "Ofertas"
     ? "Ofertas"
     : params.category;
 
@@ -164,7 +163,7 @@ export default async function CategoryPage({
           </div>
         )}
 
-        {params.category === "ofertas" && (
+        {params.category === "Ofertas" && (
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900">🔥 Ofertas Especiales</h1>
             <p className="text-gray-600 mt-2">Descubre nuestros productos con los mejores precios</p>

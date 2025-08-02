@@ -23,6 +23,7 @@ const categories = [
       "Zapatos",
       "Accesorios",
       "Novedades",
+      "Perfumes",
       "Ofertas",
     ],
   },
@@ -36,6 +37,7 @@ const categories = [
       "Calzado",
       "Accesorios",
       "Deportivo",
+      "Perfumes",
       "Ofertas",
     ],
   },
@@ -88,64 +90,36 @@ export default function Navbar() {
         {promotionalBanner.text}
       </div>
 
-      <header className="w-full bg-white shadow-sm sticky top-0 z-50">
-        {/* Top Bar con enlaces de servicio 
-        <div className="border-b border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 lg:px-8">
-            <div className="flex items-center justify-between h-10 text-xs">
-              <div className="flex items-center space-x-4">
-                <button className="flex items-center space-x-1 hover:text-primary transition">
-                  <Globe className="w-3 h-3" />
-                  <span>ES / USD</span>
-                </button>
-                <Link href="/app" className="hover:text-primary transition">
-                  Descargar App
-                </Link>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Link
-                  href="/customer-service"
-                  className="hover:text-primary transition"
-                >
-                  Atención al Cliente
-                </Link>
-                <Link
-                  href="/track-order"
-                  className="hover:text-primary transition"
-                >
-                  Rastrear Pedido
-                </Link>
-                <Link
-                  href="/size-guide"
-                  className="hover:text-primary transition"
-                >
-                  Guía de Tallas
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>*/}
+      <header className="w-full bg-white shadow-sm sticky top-0 z-50 relative">
 
         {/* Main Navigation Bar */}
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden p-2"
-              onClick={() => setShowMobileMenu(!showMobileMenu)}
-            >
-              <Menu className="w-5 h-5" />
-            </button>
+          <div className="flex items-center h-16">
+            {/* Mobile: Menu Button + Logo */}
+            <div className="flex items-center lg:hidden">
+              <button
+                className="p-2 mr-2"
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+              
+              <Link href="/" className="flex items-center" onClick={() => setShowMobileMenu(false)}>
+                <span className="text-2xl font-extrabold tracking-wide">
+                  Le<span className="text-primary">Foret</span>
+                </span>
+              </Link>
+            </div>
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center" onClick={() => setShowMobileMenu(false)}>
+            {/* Desktop: Logo */}
+            <Link href="/" className="hidden lg:flex items-center" onClick={() => setShowMobileMenu(false)}>
               <span className="text-2xl lg:text-3xl font-extrabold tracking-wide">
                 Le<span className="text-primary">Foret</span>
               </span>
             </Link>
 
             {/* Desktop Categories */}
-            <nav className="hidden lg:flex items-center space-x-6">
+            <nav className="hidden lg:flex items-center space-x-6 flex-1 justify-center">
               {categories.map((cat, idx) => (
                 <div
                   key={idx}
@@ -185,35 +159,15 @@ export default function Navbar() {
                 </div>
               ))}
               <Link
-                href="/ofertas"
+                href="/Ofertas"
                 className="text-sm font-medium text-red-600 hover:text-red-700 transition py-2"
               >
                 🔥 OFERTAS
               </Link>
             </nav>
 
-            {/* Search Bar 
-            <div className="hidden md:flex flex-1 max-w-md mx-4">
-              <div
-                className={`relative w-full transition-all duration-200 ${isSearchFocused ? "shadow-lg" : ""}`}
-              >
-                <input
-                  type="text"
-                  placeholder="Buscar productos, marcas..."
-                  className="w-full pl-4 pr-12 py-2.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-primary focus:shadow-lg transition-all"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setIsSearchFocused(false)}
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full transition">
-                  <Search className="w-4 h-4 text-gray-500" />
-                </button>
-              </div>
-            </div>*/}
-
             {/* Right Icons */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 ml-auto">
               
               <button className="hidden md:flex p-2 hover:bg-gray-50 rounded-full transition relative">
                 <Heart className="w-5 h-5" />
@@ -246,19 +200,8 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {showMobileMenu && (
-          <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full top-full shadow-lg z-40">
+          <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full top-full shadow-lg z-[60] max-h-[80vh] overflow-y-auto">
             <div className="p-4 space-y-4">
-              {/* Mobile Search 
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar productos..."
-                  className="w-full pl-4 pr-10 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
-              </div>*/}
 
               {/* Mobile Categories */}
               <div className="space-y-2">
@@ -289,7 +232,7 @@ export default function Navbar() {
                 ))}
                 <div className="pt-2">
                   <Link
-                    href="/ofertas"
+                    href="/Ofertas"
                     className="block text-red-600 font-medium py-2"
                     onClick={() => setShowMobileMenu(false)}
                   >

@@ -73,17 +73,17 @@ export default function ProductPage({ data }: { data: fullProduct }) {
             </Link>
             <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
             <Link
-              href={`/${data.sexoName}`}
+              href={`/${data.sexo}`}
               className="hover:text-primary whitespace-nowrap"
             >
-              {data.sexoName}
+              {data.sexo}
             </Link>
             <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
             <Link
-              href={`/${data.sexoName}/${data.categoryName}`}
+              href={`/${data.sexo}/${data.Categoria}`}
               className="hover:text-primary whitespace-nowrap"
             >
-              {data.categoryName}
+              {data.Categoria}
             </Link>
             <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
             <span className="text-gray-900 truncate">{data.name}</span>
@@ -99,7 +99,6 @@ export default function ProductPage({ data }: { data: fullProduct }) {
             <div className="w-full  bg-white rounded-lg shadow-sm overflow-hidden">
               <ImageGallery images={data.images} />
             </div>
-
           </div>
 
           {/* Información del producto */}
@@ -107,10 +106,12 @@ export default function ProductPage({ data }: { data: fullProduct }) {
             {/* Header del producto */}
             <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
               <div className="flex justify-between items-start mb-3 sm:mb-4">
-                <div className="flex-1 min-w-0"> {/* min-w-0 para permitir truncado */}
+                <div className="flex-1 min-w-0">
+                  {" "}
+                  {/* min-w-0 para permitir truncado */}
                   <div className="flex  sm:flex-row sm:items-center gap-2 mb-2">
                     <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded uppercase tracking-wide w-fit">
-                      {data.categoryName} • {data.sexoName}
+                      {data.sexo} • {data.Categoria}
                     </span>
                     {discount > 0 && (
                       <span className="px-2 py-1 bg-red-500 text-white text-xs font-bold rounded w-fit">
@@ -170,7 +171,6 @@ export default function ProductPage({ data }: { data: fullProduct }) {
                 </div>
               </div>
 
-              {/* Botones de acción - Stack en móvil, lado a lado en desktop */}
               {/* Botones de acción */}
               <div className="space-y-3">
                 <div className="flex gap-3">
@@ -183,7 +183,7 @@ export default function ProductPage({ data }: { data: fullProduct }) {
                     key={data._id}
                   />
                   <Link
-                    href={`https://wa.me/584120828474?text=*Hola,%20me%20interesa%20el%20siguiente%20articulo*.%0a*Producto:*%20${data.name}%0a*Categoria:*%20${data.categoryName}%0a*Precio:*%20${data.price}$`}
+                    href={`https://wa.me/584120828474?text=*Hola,%20me%20interesa%20el%20siguiente%20articulo*.%0a*Producto:*%20${data.name}%0a*Categoria:*%20${data.Categoria}`}
                     className="flex-1"
                   >
                     <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
@@ -213,7 +213,9 @@ export default function ProductPage({ data }: { data: fullProduct }) {
                       <p className="font-medium text-gray-900 text-xs sm:text-sm leading-tight">
                         {benefit.text}
                       </p>
-                      <p className="text-xs text-gray-600 mt-1">{benefit.subtext}</p>
+                      <p className="text-xs text-gray-600 mt-1">
+                        {benefit.subtext}
+                      </p>
                     </div>
                   </div>
                 ))}

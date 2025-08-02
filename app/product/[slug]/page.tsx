@@ -12,8 +12,8 @@ async function getData(slug: string): Promise<fullProduct> {
   name,
   description,
   "slug": slug.current,
-  "categoryName": sexo->name,
-  "sexoName": category->name,
+  "sexo": sexo->name,
+  "Categoria": categories[0]->name,
 }`;
 
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: `${data.name} | Le Forêt`,
-    description: `Compra ${data.name} por solo $${data.price}. Categoría: ${data.categoryName}`,
+    description: `Compra ${data.name} por solo $${data.price}. Categoría: ${data.Categoria}`,
     openGraph: {
       title: `${data.name} | Le Forêt`,
       description: data.description,

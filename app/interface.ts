@@ -13,8 +13,8 @@ export interface fullProduct{
     images: any;
     price: number;
     slug: string;
-    categoryName: string;
-    sexoName: string;
+    sexo: string;
+    Categoria: string;
     name: string;
     description: string;
 }
