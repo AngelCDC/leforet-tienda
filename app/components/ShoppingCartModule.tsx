@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ShoppingCartModal(){
 
-    const{cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice}= useShoppingCart();
+    const{cartCount, shouldDisplayCart, handleCartClick, cartDetails, removeItem, totalPrice, clearCart}= useShoppingCart();
 
     // Función para generar el mensaje de WhatsApp
     const generateWhatsAppMessage = () => {
@@ -38,6 +38,14 @@ export default function ShoppingCartModal(){
     };
 
     const whatsappUrl = `https://wa.me/584120828474?text=${generateWhatsAppMessage()}`;
+
+    // Función para manejar el checkout y limpiar el carrito
+    const handleWhatsAppCheckout = () => {
+        // Limpiar el carrito después del checkout
+        clearCart();
+        // Cerrar el modal del carrito
+        handleCartClick();
+    };
 
     return (
         <Sheet open={shouldDisplayCart} onOpenChange={()=>handleCartClick()}>
@@ -91,7 +99,9 @@ export default function ShoppingCartModal(){
                         <div className="mt-6">
                             {(cartCount ?? 0) > 0 ? (
                                 <Link href={whatsappUrl} className="w-full">
-                                    <Button className="w-full">Checkout via WhatsApp</Button>
+                                    <Button className="w-full" onClick={handleWhatsAppCheckout}>
+                                        Checkout via WhatsApp
+                                    </Button>
                                 </Link>
                             ) : (
                                 <Button className="w-full" disabled>Checkout</Button>

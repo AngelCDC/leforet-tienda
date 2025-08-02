@@ -85,23 +85,7 @@ export default async function Newest() {
                                     </Link>
 
                                     {/* Overlay con controles */}
-                                    <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-500">
-                                        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                                            <div className="flex gap-3">
-                                                <button className="w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all hover:scale-110 shadow-lg">
-                                                    <Heart className="w-5 h-5 text-slate-700" />
-                                                </button>
-                                                <button className="w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all hover:scale-110 shadow-lg">
-                                                    <Eye className="w-5 h-5 text-slate-700" />
-                                                </button>
-                                            </div>
-                                            <Link href={`/product/${data[0].slug}`}>
-                                                <button className="bg-slate-900 text-white px-6 py-3 text-sm font-light tracking-[0.1em] hover:bg-slate-800 transition-all">
-                                                    VIEW DETAILS
-                                                </button>
-                                            </Link>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
                                 {/* Información del producto featured */}
@@ -181,23 +165,7 @@ export default async function Newest() {
                                                 </Link>
 
                                                 {/* Overlay con controles */}
-                                                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-500">
-                                                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                                                        <div className="flex gap-2">
-                                                            <button className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all hover:scale-110 shadow-lg">
-                                                                <Heart className="w-4 h-4 text-slate-700" />
-                                                            </button>
-                                                            <button className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all hover:scale-110 shadow-lg">
-                                                                <Eye className="w-4 h-4 text-slate-700" />
-                                                            </button>
-                                                        </div>
-                                                        <Link href={`/product/${product.slug}`}>
-                                                            <button className="bg-slate-900 text-white px-4 py-2 text-xs font-light tracking-[0.05em] hover:bg-slate-800 transition-all">
-                                                                VIEW
-                                                            </button>
-                                                        </Link>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
                                             {/* Información del producto */}
@@ -247,7 +215,7 @@ export default async function Newest() {
                         href="/all"
                         className="group inline-flex items-center gap-6 bg-slate-900 text-white px-12 py-4 hover:bg-slate-800 transition-all duration-300"
                     >
-                        <span className="font-light tracking-[0.1em]">EXPLORE FULL COLLECTION</span>
+                        <span className="font-light tracking-[0.1em]">CONOCE TODA LA COLECCIÓN</span>
                         <div className="w-12 h-px bg-white/30 group-hover:bg-white/60 transition-colors"></div>
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                     </Link>

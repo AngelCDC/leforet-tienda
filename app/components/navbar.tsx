@@ -190,12 +190,6 @@ export default function Navbar() {
               >
                 🔥 OFERTAS
               </Link>
-              <Link
-                href="/nuevos"
-                className="text-sm font-medium hover:text-primary transition py-2"
-              >
-                Nuevos
-              </Link>
             </nav>
 
             {/* Search Bar 
@@ -304,13 +298,7 @@ export default function Navbar() {
                   >
                     🔥 OFERTAS
                   </Link>
-                  <Link
-                    href="/nuevos"
-                    className="block text-gray-900 font-medium py-2"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    Nuevos
-                  </Link>
+                  
                 </div>
               </div>
             </div>

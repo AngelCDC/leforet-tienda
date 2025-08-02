@@ -1,4 +1,4 @@
-// app/category/[category]/page.tsx - Versión optimizada
+// app/category/[category]/page.tsx - Versión que incluye "all"
 
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -9,7 +9,25 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 async function getDataWithValidation(category: string) {
-  // Consulta que obtiene productos Y verifica si la categoría existe
+  // Si es "all", obtener todos los productos
+  if (category === "all") {
+    const query = `{
+      "category": {"name": "all", "_id": "all"},
+      "products": *[_type=="product"]{
+        _id,
+        "imageUrl": images[0].asset->url,
+        price,
+        name,
+        "slug": slug.current,
+        "categoryName": category->name
+      }
+    }`;
+    
+    const result = await client.fetch(query);
+    return result;
+  }
+
+  // Consulta normal para categorías específicas
   const query = `{
     "category": *[_type=="category" && name=="${category}"][0],
     "products": *[_type=="product" && category->name=="${category}" ]{
@@ -31,6 +49,17 @@ export async function generateMetadata({
 }: {
   params: { category: string };
 }): Promise<Metadata> {
+  if (params.category === "all") {
+    return {
+      title: "Todos los Productos | Le Forêt",
+      description: "Explora todos nuestros productos únicos.",
+      openGraph: {
+        title: "Todos los Productos | Le Forêt",
+        description: "Explora todos nuestros productos únicos.",
+      },
+    };
+  }
+
   const { category: categoryData, products } = await getDataWithValidation(
     params.category
   );
@@ -70,10 +99,18 @@ export default async function CategoryPage({
     params.category
   );
 
-  // ✅ Si la categoría no existe, mostrar 404
-  if (!categoryData) {
+  // Si no es "all" y la categoría no existe, mostrar 404
+  if (params.category !== "all" && !categoryData) {
     notFound();
   }
+
+  const pageTitle = params.category === "all" 
+    ? "Todos los Productos" 
+    : params.category;
+
+  const breadcrumbText = params.category === "all" 
+    ? "Todos" 
+    : params.category;
 
   return (
     <div className="bg-white py-2">
@@ -84,11 +121,17 @@ export default async function CategoryPage({
               Productos
               <ChevronRight className="w-4 h-4" />
               <Link href={`/${params.category}`} className="hover:text-primary">
-                {params.category}
+                {breadcrumbText}
               </Link>
             </div>
           </div>
         </div>
+
+        {params.category === "all" && (
+          <div className="">
+            
+          </div>
+        )}
 
         <CategoryProducts products={products} />
       </div>
