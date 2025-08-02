@@ -1,4 +1,4 @@
-// app/category/[category]/page.tsx - Versión que incluye "all"
+// app/category/[category]/page.tsx - Versión que incluye "all" y "ofertas"
 
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -27,10 +27,26 @@ async function getDataWithValidation(category: string) {
     return result;
   }
 
-  // Consulta normal para categorías específicas
+  // Si es "ofertas", buscar productos que tengan categoría con slug "ofertas"
+  if (category === "ofertas") {
+    const query = `{ "products": *[_type=="product" && "Oferta" in categories[]->name]{
+        _id,
+        "imageUrl": images[0].asset->url,
+        price,
+        name,
+        "slug": slug.current,
+        "categories": category[]->name
+      }
+    }`;
+    
+    const result = await client.fetch(query);
+    return result;
+  }
+
+  // Consulta normal para categorías específicas (por nombre)
   const query = `{
     "category": *[_type=="category" && name=="${category}"][0],
-    "products": *[_type=="product" && category->name=="${category}" ]{
+    "products": *[_type=="product" && sexo->name=="${category}" ]{
       _id,
       "imageUrl": images[0].asset->url,
       price,
@@ -56,6 +72,17 @@ export async function generateMetadata({
       openGraph: {
         title: "Todos los Productos | Le Forêt",
         description: "Explora todos nuestros productos únicos.",
+      },
+    };
+  }
+
+  if (params.category === "ofertas") {
+    return {
+      title: "Ofertas Especiales | Le Forêt",
+      description: "Descubre nuestras mejores ofertas y productos en descuento.",
+      openGraph: {
+        title: "Ofertas Especiales | Le Forêt",
+        description: "Descubre nuestras mejores ofertas y productos en descuento.",
       },
     };
   }
@@ -99,17 +126,21 @@ export default async function CategoryPage({
     params.category
   );
 
-  // Si no es "all" y la categoría no existe, mostrar 404
-  if (params.category !== "all" && !categoryData) {
+  // Si no es "all" ni "ofertas" y la categoría no existe, mostrar 404
+  if (params.category !== "all" && params.category !== "ofertas" && !categoryData) {
     notFound();
   }
 
   const pageTitle = params.category === "all" 
     ? "Todos los Productos" 
+    : params.category === "ofertas"
+    ? "Ofertas Especiales"
     : params.category;
 
   const breadcrumbText = params.category === "all" 
     ? "Todos" 
+    : params.category === "ofertas"
+    ? "Ofertas"
     : params.category;
 
   return (
@@ -130,6 +161,13 @@ export default async function CategoryPage({
         {params.category === "all" && (
           <div className="">
             
+          </div>
+        )}
+
+        {params.category === "ofertas" && (
+          <div className="mb-6">
+            <h1 className="text-3xl font-bold text-gray-900">🔥 Ofertas Especiales</h1>
+            <p className="text-gray-600 mt-2">Descubre nuestros productos con los mejores precios</p>
           </div>
         )}
 

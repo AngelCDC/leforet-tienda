@@ -10,7 +10,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 // Función para validar que tanto la categoría como el sexo existen
-async function validateCategoryAndSexo(category: string, sexo: string): Promise<boolean> {
+async function validateCategoryAndSexo(sexo: string, category: string): Promise<boolean> {
   const query = `{
     "category": *[_type=="category" && name=="${category}"][0],
     "sexo": *[_type=="category" && name=="${sexo}"][0]
@@ -20,8 +20,8 @@ async function validateCategoryAndSexo(category: string, sexo: string): Promise<
   return !!(result.category && result.sexo);
 }
 
-async function getData(category: string, sexo: string): Promise<simplifiedProduct[]> {
-  const query = `*[_type=="product" && category->name=="${category}" && sexo->name=="${sexo}"]{
+async function getData(sexo: string, category: string): Promise<simplifiedProduct[]> {
+  const query = `*[_type=="product" && sexo->name=="${sexo}" && "${category}" in categories[]->name]{
     _id,
     "imageUrl": images[0].asset->url,
     price,

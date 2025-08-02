@@ -1,4 +1,7 @@
-export default {
+// OPCIÓN 1: Array de referencias a subcategorías
+import {defineType} from 'sanity'
+
+export default defineType({
     name: `product`,
     type: `document`,
     title: `Product`,
@@ -33,14 +36,6 @@ export default {
             title: `Price`,
         },
         {
-            name:`category`,
-            title: `Categoria del Producto`,
-            type: `reference`,
-            to: [{
-                type: `category`,
-            }]
-        },
-        {
             name:`sexo`,
             title: `Sexo del Producto`,
             type: `reference`,
@@ -48,5 +43,17 @@ export default {
                 type: `category`,
             }]
         },
+        {
+            name:`categories`,
+            title: `Categorias del Producto`,
+            type: `array`,
+            of: [{
+                type: `reference`,
+                to: [{
+                    type: `category`,
+                }]
+            }],
+            description: `Selecciona todas las categorías que apliquen: Perfumes, Oferta, Tendencia, etc.`
+        },
     ],
-}
+})
