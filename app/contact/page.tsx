@@ -146,7 +146,7 @@ export default function Contactanos() {
           </h1>
           <div className="w-24 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-700 font-light max-w-4xl mx-auto leading-relaxed">
-            "Estamos aquí para ayudarte a encontrar las piezas perfectas que complementen tu estilo único"
+            Estamos aquí para ayudarte a encontrar las piezas perfectas que complementen tu estilo único.
           </p>
           
           <div className="mt-12 flex justify-center items-center space-x-6">

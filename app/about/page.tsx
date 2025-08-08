@@ -29,7 +29,7 @@ export default function QuienesSomos() {
           </h1>
           <div className="w-24 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-700 font-light max-w-4xl mx-auto leading-relaxed">
-            "Donde cada accesorio cuenta una historia de elegancia atemporal y cada cliente encuentra su esencia única"
+            Donde cada accesorio cuenta una historia de elegancia atemporal y cada cliente encuentra su esencia única
           </p>
         </div>
       </section>

@@ -68,7 +68,7 @@ export default function BloggerModa() {
           </h1>
           <div className="w-24 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-700 font-light max-w-4xl mx-auto leading-relaxed">
-            "Donde tu pasión por la moda se encuentra con oportunidades únicas para brillar y crear contenido auténtico que inspire a otros"
+            Donde tu pasión por la moda se encuentra con oportunidades únicas para brillar y crear contenido auténtico que inspire a otros
           </p>
           
           <div className="mt-12 flex justify-center items-center space-x-6">
@@ -114,8 +114,8 @@ export default function BloggerModa() {
 
               <div className="bg-gray-50 rounded-xl p-6 border-l-4 border-amber-600">
                 <p className="text-gray-800 font-light italic">
-                  "Buscamos personas genuinas que vean en cada accesorio una oportunidad de contar su historia 
-                  y que entiendan que la elegancia no grita, simplemente es."
+                  Buscamos personas genuinas que vean en cada accesorio una oportunidad de contar su historia 
+                  y que entiendan que la elegancia no grita, simplemente es.
                 </p>
               </div>
             </div>

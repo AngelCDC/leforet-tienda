@@ -89,7 +89,7 @@ export default function Afiliados() {
           </h1>
           <div className="w-24 h-0.5 bg-gradient-to-r from-yellow-600 to-amber-600 mx-auto mb-8"></div>
           <p className="text-xl md:text-2xl text-gray-700 font-light max-w-4xl mx-auto leading-relaxed">
-            "Transforma tu pasión por la moda en una fuente de ingresos sostenible, promocionando productos que realmente amas"
+            Transforma tu pasión por la moda en una fuente de ingresos sostenible, promocionando productos que realmente amas
           </p>
           
           <div className="mt-12 flex justify-center items-center space-x-6">
