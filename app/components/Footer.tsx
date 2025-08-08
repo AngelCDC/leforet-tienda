@@ -37,7 +37,8 @@ const Footer = () => {
                   Blogger De Moda
                 </Link>
               </li>
-              <li>
+
+              {/* <li>
                 <Link
                   href="/social-responsibility"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -52,7 +53,7 @@ const Footer = () => {
                 >
                   Sala de Prensa
                 </Link>
-              </li>
+              </li> */}
 
               <li>
                 <Link
@@ -79,7 +80,7 @@ const Footer = () => {
                   Información De Envío
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/returns"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -104,7 +105,7 @@ const Footer = () => {
                 >
                   Política de clasificación
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -122,7 +123,7 @@ const Footer = () => {
                   Contáctenos
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/payment"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -137,7 +138,7 @@ const Footer = () => {
                 >
                   Puntos
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
